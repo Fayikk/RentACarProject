@@ -1,5 +1,7 @@
-﻿using DataAcces.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAcces.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,66 +11,22 @@ using System.Threading.Tasks;
 
 namespace DataAcces.Concrete
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, RentCarsContext>, ICarDal
     {
-        public void Add(Car entity)
+        public List<CarDetailDto> GetCarDetailDtos()
         {
+            //Öncellikle veri tabanında işlem yaptığımzı belirtmemiz gerekmektedir.
+            //Bunun içindirki using kullanımı gerçekleştiriyoruz.
             using (RentCarsContext context = new RentCarsContext())
             {
-                //Referans ataama işlemi 
-                var addedEntity = context.Entry(entity);
-                //Durum belirtme işlemi
-                addedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Added;
-                //Değişiklikleri kaydetma
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Car entity)
-        {
-            using (RentCarsContext context = new RentCarsContext())
-            {
-                //Referans ataama işlemi 
-                var deletedEntity = context.Entry(entity);
-                //Durum belirtme işlemi
-                deletedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                //Değişiklikleri kaydetma
-                context.SaveChanges();
-            }
-        }
-
-        public Car Get(Expression<Func<Car, bool>> Filter)
-        {
-            using (RentCarsContext context = new RentCarsContext())
-            {
-                //Filtre olması gerektiği için herhangi bir şekilde sorgulama işlemi gerçekleştirilmedi.
-                return context.Set<Car>().SingleOrDefault(Filter);
-            }
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> Filter = null)
-        {
-            //Burada filtre olma yada olmam durumıun geçerli olduğu için bnların kontrolünün sağlanması gerekmektedir.
-
-            using (RentCarsContext context = new RentCarsContext())
-            {
-                return Filter == null ?
-                    context.Set<Car>().ToList() :
-                    context.Set<Car>().Where(Filter).ToList();
-            }
-        }
-
-        public void Update(Car entity)
-        {
-            using (RentCarsContext context = new RentCarsContext())
-            {
-                //Referans ataama işlemi 
-                var updatedEntity = context.Entry(entity);
-                //Durum belirtme işlemi
-                updatedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                //Değişiklikleri kaydetma
-                context.SaveChanges();
-            }
+                 //değeri döndürmek için bir geçici değişkene ifadelerimizi aktaralim.
+                 var result=from c in context.Cars //Arabaların dbo'sunu çekiyoeuz.
+                            join b in context.Brands // brands veritabanını çekiyoruz.
+                            //Şimdi koşul yazıyoruz.Koşulumuz geçerli ise devam ettirme işlemi 
+                            on c.BrandId equals b.BrandId
+                            select new CarDetailDto { BrandId=b.BrandId,BrandName=b.BrandName,CarName=c.CarName,CarId=c.CarId};
+                            return result.ToList();
+              }
         }
     }
 }
