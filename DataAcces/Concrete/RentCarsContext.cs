@@ -12,7 +12,7 @@ namespace DataAcces.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; DataBase=NorthWind;Trusted_Connection =true");
+            optionsBuilder.UseSqlServer(@"Server=FAYIK; DataBase=Deneme5;Trusted_Connection =true");
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }

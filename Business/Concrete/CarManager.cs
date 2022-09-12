@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAcces.Abstract;
+using DataAcces.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,18 @@ namespace Business.Concrete
             _ıcarDal = ıcarDal;
         }
 
-
+        public void Add(Car car)
+        {
+            if (car.Description.Length > 2 && car.DailyPrice > 0)
+            {
+                _ıcarDal.Add(car);
+                Console.WriteLine("Eklendi..");
+            }
+            else
+            {
+                Console.WriteLine("Eklenemedi");
+            }
+        }
 
         public List<Car> GetAll()
         {
