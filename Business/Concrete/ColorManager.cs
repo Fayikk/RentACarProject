@@ -17,6 +17,16 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
+        public void Add(Entities.Concrete.Color color)
+        {
+            _colorDal.Add(color);
+        }
+
+        public void delete(Entities.Concrete.Color color)
+        {
+            _colorDal.Delete(color);
+        }
+
         public List<Entities.Concrete.Color> GetAll()
         {
             return _colorDal.GetAll();
@@ -25,6 +35,11 @@ namespace Business.Concrete
         public List<Color> GetCarsByColorId(int colorId)
         {
             throw new NotImplementedException();
+        }
+
+        public void Update(Entities.Concrete.Color color)
+        {
+            _colorDal.Update(color);
         }
 
         List<Entities.Concrete.Color> IColorService.GetCarsByColorId(int colorId)

@@ -28,5 +28,11 @@ namespace DataAcces.Concrete
                             return result.ToList();
               }
         }
+        //Her üç tabloyuda yazdırabilecek bir join işlemi ile kod işlemi gerçekleştirelim.
+        //
+        
+
+        
+        
     }
 }

@@ -20,6 +20,16 @@ namespace Business.Concrete
             _ıcarDal = ıcarDal;
         }
 
+        public void add(Car car)
+        {
+            _ıcarDal.Add(car);
+        }
+
+        public void Deleted(Car car)
+        {
+            _ıcarDal.Delete(car);
+        }
+
         //public List<Car> Add(Car entity)
         //{
         //    return _ıcarDal.Add(entity).ToList();
@@ -33,6 +43,11 @@ namespace Business.Concrete
         public List<CarDetailDto> GetCarDetailDtos()
         {
             return _ıcarDal.GetCarDetailDtos();
+        }
+
+        public void Updated(Car car)
+        {
+            _ıcarDal.Update(car);
         }
     }
 }

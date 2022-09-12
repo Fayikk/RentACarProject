@@ -13,5 +13,9 @@ namespace Business.Abstract
         List<Car> GetAll();
         //List<Car> Add(Car entity);
         List<CarDetailDto> GetCarDetailDtos();
+
+        void add(Car car);
+        void Deleted(Car car);
+        void Updated(Car car);
     }
 }

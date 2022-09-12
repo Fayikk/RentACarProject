@@ -14,6 +14,6 @@ namespace DataAcces.Abstract
 
         List<CarDetailDto> GetCarDetailDtos();
 
-
+        
     }
 }
