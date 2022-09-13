@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,8 @@ namespace Business.Abstract
         void add(Car car);
         void Deleted(Car car);
         void Updated(Car car);
+
+        IResult Add(Car car);
+
     }
 }

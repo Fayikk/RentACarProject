@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
 using DataAcces.Abstract;
 using DataAcces.Concrete;
 using Entities.Concrete;
@@ -23,6 +25,17 @@ namespace Business.Concrete
         public void add(Car car)
         {
             _ıcarDal.Add(car);
+        }
+
+        public IResult Add(Car car)
+        {
+            if (car.CarName.Length>2)
+            {
+                //magic string
+                return new ErrorResult(Messages.ErrorMessages);
+            }
+            _ıcarDal.Add(car);
+            return new SuccessResult(Messages.SuccessMessages);
         }
 
         public void Deleted(Car car)
