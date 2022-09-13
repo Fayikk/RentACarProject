@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Business.Abstract
     public interface IBrandService
     {
         //Crud operasyonlarını buraya yazabiliriz.(Ekleme,Silme,Güncelleme operasyonları)
-        List<Brand> GetCarsByBrandId(int BrandId);
+        IDataResult<List<Brand>> GetCarsByBrandId(int BrandId);
 
         //Add
         void add(Brand brand);
@@ -20,6 +21,6 @@ namespace Business.Abstract
         //Update
         void Update(Brand brand);
 
-        List<MixedDetailDto> GetMixedDetailDtos();
+        IDataResult<List<MixedDetailDto>> GetMixedDetailDtos();
     }
 }

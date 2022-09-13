@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAcces.Abstract;
+using DataAcces.Concrete;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -28,14 +31,20 @@ namespace Business.Concrete
             brandDal.Delete(brand);
         }
 
-        public List<Brand> GetCarsByBrandId(int BrandId)
+        public IDataResult<List<Brand>> GetCarsByBrandId(int BrandId)
         {
-            return brandDal.GetAll(b=>b.BrandId==BrandId);
+            
+            if (false)
+            {
+                return new SuccessDataResult<List<Brand>>(brandDal.GetAll(b => b.BrandId == BrandId));
+            }
+            return new ErrorDataResult<List<Brand>>(Messages.ErrorMessages);
+            
         }
 
-        public List<MixedDetailDto> GetMixedDetailDtos()
+        public IDataResult<List<MixedDetailDto>> GetMixedDetailDtos()
         {
-            return brandDal.GetMixedDetailDto();
+            return new DataResult<List<MixedDetailDto>>(brandDal.GetMixedDetailDto(),true,Messages.SuccessMessages);
         }
 
         public void Update(Brand brand)

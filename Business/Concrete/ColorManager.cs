@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAcces.Abstract;
 using System;
 using System.Collections.Generic;
@@ -27,25 +29,27 @@ namespace Business.Concrete
             _colorDal.Delete(color);
         }
 
-        public List<Entities.Concrete.Color> GetAll()
+        public IDataResult<List<Entities.Concrete.Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            return new DataResult<List< Entities.Concrete.Color >>(_colorDal.GetAll(),true,Messages.SuccessMessages);
         }
 
-        public List<Color> GetCarsByColorId(int colorId)
-        {
-            throw new NotImplementedException();
-        }
+        //public IDataResult<List<Color>> GetCarsByColorId(int colorId)
+        //{
+            
+        //}
 
         public void Update(Entities.Concrete.Color color)
         {
             _colorDal.Update(color);
         }
 
-        List<Entities.Concrete.Color> IColorService.GetCarsByColorId(int colorId)
+        IDataResult<List<Entities.Concrete.Color>> IColorService.GetCarsByColorId(int colorId)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Entities.Concrete.Color>>(_colorDal.GetAll(a => a.ColorId == colorId), Messages.SuccessMessages);
         }
+
+
 
         //public List<Color> GetCarsByColorId(int colorId)
         //{

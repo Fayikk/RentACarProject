@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Core.Utilities;
+using Core.Utilities.Results;
 using DataAcces.Abstract;
 using DataAcces.Concrete;
 using Entities.Concrete;
@@ -22,10 +22,10 @@ namespace Business.Concrete
             _ıcarDal = ıcarDal;
         }
 
-        public void add(Car car)
-        {
-            _ıcarDal.Add(car);
-        }
+        //public void add(Car car)
+        //{
+        //    _ıcarDal.Add(car);
+        //}
 
         public IResult Add(Car car)
         {
@@ -48,14 +48,14 @@ namespace Business.Concrete
         //    return _ıcarDal.Add(entity).ToList();
         //}
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _ıcarDal.GetAll();
+            return new DataResult<List<Car>>(_ıcarDal.GetAll(),true,Messages.SuccessMessages);
         }
 
-        public List<CarDetailDto> GetCarDetailDtos()
+        public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
         {
-            return _ıcarDal.GetCarDetailDtos();
+            return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(),true,Messages.SuccessMessages);
         }
 
         public void Updated(Car car)

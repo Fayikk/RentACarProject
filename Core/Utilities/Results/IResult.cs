@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities
+namespace Core.Utilities.Results
 {
     public interface IResult
     {
@@ -12,7 +12,7 @@ namespace Core.Utilities
         //Bu değişkenlerin asıl amacı şu şekildedir.
         //boolean ifade eğer true değer döner ise mesajımız başarılı bir anlam taşımaktadır.
         //Eğer boolean ifademiz false dönecekse messajımız başarısız bir operasyon anlamını taşımalıdır.
-        bool Success { get; }   
-        string Message { get; } 
+        bool Success { get; }
+        string Message { get; }
     }
 }

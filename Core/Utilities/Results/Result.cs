@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities
+namespace Core.Utilities.Results
 {
     public class Result : IResult
     {
@@ -15,7 +15,7 @@ namespace Core.Utilities
 
         //constructor'larımızı yazalım.
 
-        public Result(bool success,string message):this(success)
+        public Result(bool success, string message) : this(success)
         {
             Message = message;
             //Burada 2 parametreye ihtiyaç duyulduğu zaman bu metod kullanılmaktadır.
