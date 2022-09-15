@@ -38,9 +38,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SuccessMessages);
         }
 
-        public void Deleted(Car car)
+        public IResult Deleted(Car car)
         {
             _ıcarDal.Delete(car);
+            return new Result(true);
         }
 
         //public List<Car> Add(Car entity)
@@ -58,9 +59,14 @@ namespace Business.Concrete
             return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(),true,Messages.SuccessMessages);
         }
 
-        public void Updated(Car car)
+        public IResult Updated(Car car)
         {
+            if (car.CarName.Length>2)
+            {
+                return new ErrorResult(Messages.ErrorMessages);
+            }
             _ıcarDal.Update(car);
+            return new SuccessResult(Messages.SuccessMessages);
         }
     }
 }

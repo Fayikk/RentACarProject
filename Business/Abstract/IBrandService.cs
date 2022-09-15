@@ -13,13 +13,13 @@ namespace Business.Abstract
     {
         //Crud operasyonlarını buraya yazabiliriz.(Ekleme,Silme,Güncelleme operasyonları)
         IDataResult<List<Brand>> GetCarsByBrandId(int BrandId);
-
+        IDataResult<List<Brand>> GetAll();
         //Add
-        void add(Brand brand);
+        IResult add(Brand brand);
         //Delete
-        void delete(Brand brand);
+        IResult delete(Brand brand);
         //Update
-        void Update(Brand brand);
+        IResult Update(Brand brand);
 
         IDataResult<List<MixedDetailDto>> GetMixedDetailDtos();
     }

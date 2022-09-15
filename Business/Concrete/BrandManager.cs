@@ -21,14 +21,22 @@ namespace Business.Concrete
             brandDal = _brandDal;
         }
 
-        public void add(Brand brand)
+        public IResult add(Brand brand)
         {
             brandDal.Add(brand);
+            return new Result(true);
         }
 
-        public void delete(Brand brand)
+        public IResult delete(Brand brand)
         {
             brandDal.Delete(brand);
+        
+            return new Result(true);
+        }
+
+        public IDataResult<List<Brand>> GetAll()
+        {
+            return new DataResult<List<Brand>>(brandDal.GetAll(),true,Messages.SuccessMessages);
         }
 
         public IDataResult<List<Brand>> GetCarsByBrandId(int BrandId)
@@ -47,9 +55,10 @@ namespace Business.Concrete
             return new DataResult<List<MixedDetailDto>>(brandDal.GetMixedDetailDto(),true,Messages.SuccessMessages);
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
             brandDal.Update(brand);
+            return new Result(true,Messages.SuccessMessages);
         }
     }
 }

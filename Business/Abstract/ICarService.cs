@@ -16,8 +16,8 @@ namespace Business.Abstract
         IDataResult<List<CarDetailDto>> GetCarDetailDtos();
 
         //void add(Car car);
-        void Deleted(Car car);
-        void Updated(Car car);
+        IResult Deleted(Car car);
+        IResult Updated(Car car);
 
         IResult Add(Car car);
 
