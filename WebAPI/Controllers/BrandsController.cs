@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAcces.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,12 +40,17 @@ namespace WebAPI.Controllers
 
         }
 
-        //[HttpPost("Update")]
-        //public IActionResult()
-        //{
-
-        //}
-
+        [HttpPost("Update")]
+        
+        public IActionResult Update(Brand brand)
+        {
+            var result = _brandService.Update(brand);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
 
 
 

@@ -11,7 +11,8 @@ namespace DataAcces.Abstract
     public interface ICarDal:IEntityRepository<Car>
     {
         //join ifadeleri için gerekli tanımlamaları gerçekleştirelim.
-
+        //Class'a özgü ifadeleri buraya yazıyoruz.
+        //Aşağıda görüldüğü üzere class'a özgü uygulamak istediğimiz ifadeleri yazıyoruz.
         List<CarDetailDto> GetCarDetailDtos();
 
         

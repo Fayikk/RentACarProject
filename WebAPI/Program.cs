@@ -1,29 +1,37 @@
+ï»¿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
+using Business.DependencyResolves.Autofac;
 using DataAcces.Abstract;
 using DataAcces.Concrete;
 
-var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());//Dependency injection iÃ§in gerekli adÃ½m.Autofac kullanÃ½mÃ½ iÃ§in hazÃ½rlÃ½k.
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterModule(new AutofacBusinessModule());//BaÃ°Ã½mlÃ½lÃ½ktan kurtulmak iÃ§in IoC yapÃ½lan dosyanÃ½n yolunu veriyoruz.
+});
+
+//builder.Services.AddSingleton<ICarService, CarManager>();//Burada aynÄ± ÅŸekilde baÄŸÄ±mlÄ±lÄ±klardan kurtulmak iÃ§in yapÄ±lan bir yapÄ±dÄ±r.
+////Bu yapÄ±da ICarService'i gÃ¶rÃ¼rsen eÄŸer CarManager'Ä± new'le anlmaÄ±na gelmketedir.
+//builder.Services.AddSingleton<ICarDal, EfCarDal>();//Burada ise ICarDal gÃ¶rÃ¼rsen,EfCarDal new'le anlamÄ±na gelmektedir.
+
+////BRANDS
+//builder.Services.AddSingleton<IBrandService, BrandManager>();
+//builder.Services.AddSingleton<IBrandDal, EfBrandDal>();
+
+////Colors
+//builder.Services.AddSingleton<IColorService, ColorManager>();
+//builder.Services.AddSingleton<IColorDal, EfColorDal>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-builder.Services.AddSingleton<ICarService, CarManager>();//Burada aynı şekilde bağımlılıklardan kurtulmak için yapılan bir yapıdır.
-//Bu yapıda ICarService'i görürsen eğer CarManager'ı new'le anlmaına gelmketedir.
-builder.Services.AddSingleton<ICarDal, EfCarDal>();//Burada ise ICarDal görürsen,EfCarDal new'le anlamına gelmektedir.
-
-//BRANDS
-builder.Services.AddSingleton<IBrandService, BrandManager>();
-builder.Services.AddSingleton<IBrandDal, EfBrandDal>();
-
-//Colors
-builder.Services.AddSingleton<IColorService, ColorManager>();
-builder.Services.AddSingleton<IColorDal, EfColorDal>();
 
 var app = builder.Build();
 
