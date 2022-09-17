@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +37,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-
+        [HttpPost("AddColor")]
+        public IActionResult Add(Color color)
+        {
+            var result = colorService.Add(color);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
 
 

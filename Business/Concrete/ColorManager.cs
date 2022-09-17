@@ -1,10 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAcces.Abstract;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +21,11 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-
-        public void Add(Entities.Concrete.Color color)
+        [ValidationAspect(typeof(ColorValidator))]
+        public IResult Add(Entities.Concrete.Color color)
         {
             _colorDal.Add(color);
+           return new Result(true,Messages.SuccessMessages);
         }
 
         public void delete(Entities.Concrete.Color color)
@@ -43,6 +47,7 @@ namespace Business.Concrete
         {
             _colorDal.Update(color);
         }
+        [ValidationAspect(typeof(ColorValidator))]
 
         IDataResult<List<Entities.Concrete.Color>> IColorService.GetCarsByColorId(int colorId)
         {
