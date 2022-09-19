@@ -33,6 +33,12 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<ColorManager>().As<IColorService>().SingleInstance();
             builder.RegisterType<EfColorDal>().As<IColorDal>().SingleInstance();
 
+            //For CarImages
+            builder.RegisterType<CarImagesManager>().As<ICarImagesService>().SingleInstance();
+            builder.RegisterType<EfCarImages>().As<ICarImagesDal>().SingleInstance();
+
+
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

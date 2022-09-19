@@ -19,7 +19,21 @@ namespace WebAPI.Controllers
             _carService = carService;
             //Bu yapı sayesinde bağımlılık seviyemzizi en aza indirgemiş olduk.
         }
-        
+
+        [HttpPost("Added")]
+        public IActionResult Add(Car car)
+        {
+            var result = _carService.Add(car);
+            if (result.Success)
+            {
+                return  Ok(result);
+            }
+            return BadRequest(result);  
+
+        }
+
+
+
         [HttpGet("getAll")]//Bu komut swagger arayüzünde sadece get etme işlemi yapacağımızı tanımlamamıza yarar.
         public IActionResult GetAll()
         {
@@ -34,16 +48,30 @@ namespace WebAPI.Controllers
             
         }
 
-        [HttpPost("Add")]
-        public IActionResult Add(Car car)
+
+        [HttpGet("GetById")]
+        public IActionResult GetbyId(int id)
         {
-            var result = _carService.Add(car);
+            var result = _carService.GetById(id);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+
+        //[HttpPost("Add")]
+        //public IActionResult Add(Car car)
+        //{
+        //    var result = _carService.Add(car);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
 
     }
 }

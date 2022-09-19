@@ -17,6 +17,7 @@ namespace DataAcces.Concrete
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<CarImages> CarImages { get; set; } //Concrete içerisindeki,CarImages dosyamızı veritabanındaki,CarImagess dosyası ile eşleştir anlamına gelmektedir.
 
     }
 }
