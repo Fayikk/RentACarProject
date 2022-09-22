@@ -12,7 +12,7 @@ namespace Core.Utilities.Results
         {
             //ÇİFT PARAMETRELİ    
         }
-        public SuccessResult(bool success) : base(false)
+        public SuccessResult(bool success) : base(true)
         {
             //TEK PARAMETRELİ
         }

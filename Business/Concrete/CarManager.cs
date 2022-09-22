@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAcces.Abstract;
 using DataAcces.Concrete;
@@ -34,12 +36,13 @@ namespace Business.Concrete
         //{
         //    _ıcarDal.Add(car);
         //}
+        [SecuredOperation("Car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             //Aynı isimde ürün ekleme işlemini engelleyelim.
 
-            IResult result = BusinesRules.Run(CheckNameControl(car.CarName), CheckIdControl(car.CarId));//Burada iş sınıfı kodlarımızı tutuyoruz.
+            IResult result = BusinessRules.Run(CheckNameControl(car.CarName), CheckIdControl(car.CarId));//Burada iş sınıfı kodlarımızı tutuyoruz.
             if (result != null)
             {
                 return result;
@@ -61,7 +64,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new DataResult<List<Car>>(_ıcarDal.GetAll(),);
+            return new DataResult<List<Car>>(_ıcarDal.GetAll(),true);
         }
 
         public IDataResult<List<Car>> GetById(int Id)

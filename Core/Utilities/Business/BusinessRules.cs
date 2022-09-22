@@ -7,21 +7,20 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Business
 {
-    public class BusinessRules
-    {
-        public class BusinesRules //İş kodları için oluşturulan motorumuz
+    
+        public  static class BusinessRules //İş kodları için oluşturulan motorumuz
         {
-            public static IResult Run(params IResult[] logics)
+            public static IResult Run(params IResult[] rules)
             {
-                foreach (var logic in logics)
+                foreach (var rule in rules)
                 {
-                    if (!logic.Success)
+                    if (!rule.Success)
                     {
-                        return logic;
+                        return rule;
                     }
                 }
                 return null;
             }
         }
     }
-}
+
