@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -36,8 +37,10 @@ namespace Business.Concrete
         //{
         //    _ıcarDal.Add(car);
         //}
-        [SecuredOperation("car.add")]
+        //[SecuredOperation("car.add")]
+        
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             //Aynı isimde ürün ekleme işlemini engelleyelim.
@@ -61,7 +64,7 @@ namespace Business.Concrete
         //{
         //    return _ıcarDal.Add(entity).ToList();
         //}
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new DataResult<List<Car>>(_ıcarDal.GetAll(),true);
