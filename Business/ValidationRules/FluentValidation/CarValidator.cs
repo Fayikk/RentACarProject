@@ -15,9 +15,9 @@ namespace Business.ValidationRules.FluentValidation
         {
             //Burada Add metodu için validator hazırladığımızı varsayalım.
             //RuleFor(c => c.CarName).Must(StartWithF).WithMessage("Ürün adı  'F' ile başlamalı");
-            RuleFor(c => c.ModelYear).NotEmpty();
-            RuleFor(c => c.DailyPrice).GreaterThan(10000);
-            //Görüldüğü üzere burada validator kodlar yazılmaktadır.
+            //RuleFor(c => c.ModelYear).NotEmpty();
+            //RuleFor(c => c.DailyPrice).GreaterThan(10000);
+            ////Görüldüğü üzere burada validator kodlar yazılmaktadır.
         
         
         }
