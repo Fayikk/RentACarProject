@@ -38,7 +38,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new DataResult<List<Brand>>(brandDal.GetAll(),true,Messages.SuccessMessages);
+            Thread.Sleep(3000);
+            return new SuccessDataResult<List<Brand>>(brandDal.GetAll(),Messages.SuccessMessages);
         }
 
         public IDataResult<List<Brand>> GetCarsByBrandId(int BrandId)

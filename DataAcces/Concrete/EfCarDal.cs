@@ -19,20 +19,20 @@ namespace DataAcces.Concrete
             //Bunun içindirki using kullanımı gerçekleştiriyoruz.
             using (RentCarsContext context = new RentCarsContext())
             {
-                 //değeri döndürmek için bir geçici değişkene ifadelerimizi aktaralim.
-                 var result=from c in context.Cars //Arabaların dbo'sunu çekiyoeuz.
-                            join b in context.Brands // brands veritabanını çekiyoruz.
-                            //Şimdi koşul yazıyoruz.Koşulumuz geçerli ise devam ettirme işlemi 
-                            on c.BrandId equals b.BrandId
-                            select new CarDetailDto { BrandId=b.BrandId,BrandName=b.BrandName,CarName=c.CarName,CarId=c.CarId};
-                            return result.ToList();
-              }
+                //değeri döndürmek için bir geçici değişkene ifadelerimizi aktaralim.
+                var result = from c in context.Cars //Arabaların dbo'sunu çekiyoeuz.
+                             join b in context.Brands // brands veritabanını çekiyoruz.
+                                                      //Şimdi koşul yazıyoruz.Koşulumuz geçerli ise devam ettirme işlemi 
+                             on c.BrandId equals b.BrandId
+                             select new CarDetailDto { BrandId = b.BrandId, BrandName = b.BrandName, CarName = c.CarName, CarId = c.CarId };
+                return result.ToList();
+            }
         }
         //Her üç tabloyuda yazdırabilecek bir join işlemi ile kod işlemi gerçekleştirelim.
         //
-        
 
-        
-        
+
+
+
     }
 }
