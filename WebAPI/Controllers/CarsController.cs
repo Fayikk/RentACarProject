@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("GetById")]
+        [HttpGet("GetByColorId")]
         public IActionResult GetbyId(int id)
         {
             var result = _carService.GetById(id);
@@ -60,6 +60,8 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        
 
 
         //[HttpPost("Add")]

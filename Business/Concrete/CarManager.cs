@@ -72,7 +72,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetById(int Id)
         {
-            return new DataResult<List<Car>>(_ıcarDal.GetAll(ı => ı.CarId == Id), true, Messages.SuccessMessages);
+            return new SuccessDataResult<List<Car>>(_ıcarDal.GetAll(ı => ı.CarId == Id), Messages.SuccessMessages);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
@@ -89,7 +89,10 @@ namespace Business.Concrete
             _ıcarDal.Update(car);
             return new SuccessResult(Messages.SuccessMessages);
         }
-
+        public IDataResult<List<Car>> GetAllByColorId(int Id)
+        {
+            return new SuccessDataResult<List<Car>>(_ıcarDal.GetAll(a => a.ColorId == Id).ToList());
+        }
         private IResult CheckNameControl(string CarName)
         {
             var result = _ıcarDal.GetAll(c => c.CarName == CarName).Any();//Buradaki Any aynımı anlamına gelmektedir.
@@ -120,5 +123,7 @@ namespace Business.Concrete
             return new SuccessResult(true);
 
         }
+
+       
     }
 }

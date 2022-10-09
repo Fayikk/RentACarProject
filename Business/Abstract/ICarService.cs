@@ -22,6 +22,7 @@ namespace Business.Abstract
         IResult Add(Car car);
 
         IDataResult<List<Car>> GetById(int Id);
+        IDataResult<List<Car>> GetAllByColorId(int Id);
 
     }
 }
