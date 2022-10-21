@@ -9,82 +9,71 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarImagesController : ControllerBase
     {
-        ICarImagesService _ıcarImageService;
-        public CarImagesController(ICarImagesService ıcarImageService)
+        ICarImageService _carImageService;
+        public CarImagesController(ICarImageService carImageService)
         {
-            _ıcarImageService = ıcarImageService;
+            _carImageService = carImageService;
         }
-
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = "Image")] IFormFile image, [FromForm] CarImages carImage)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImages carImage)
         {
-            var result = _ıcarImageService.Add(image, carImage);
+            var result = _carImageService.Add(file, carImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        // http://localhost:13331/api/carimages/delete
         [HttpPost("delete")]
         public IActionResult Delete(CarImages carImage)
         {
-            var result = _ıcarImageService.Delete(carImage);
+            var carDeleteImage = _carImageService.GetByImageId(carImage.Id).Data;
+            var result = _carImageService.Delete(carDeleteImage);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        // http://localhost:13331/api/carimages/getall
+        [HttpPost("update")]
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImages carImage)
+        {
+            var result = _carImageService.Update(file, carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _ıcarImageService.GetAll();
+            var result = _carImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        // http://localhost:13331/api/carimages/getbyid?id=16
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        [HttpGet("getbycarıd")]
+        public IActionResult GetByCarId(int carId)
         {
-            var result = _ıcarImageService.GetById(id);
+            var result = _carImageService.GetByCarId(carId);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return Ok(result);
         }
-
-        // http://localhost:13331/api/carimages/getcarimagesbycarid?carId=3
-        [HttpGet("getcarimagesbycarid")]
-        public IActionResult GetCarImagesByCarId(int carId)
+        [HttpGet("getbyimageid")]
+        public IActionResult GetByImageId(int imageId)
         {
-            var result = _ıcarImageService.GetCarImagesByCarId(carId);
+            var result = _carImageService.GetByImageId(imageId);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        // http://localhost:13331/api/carimages/update
-        [HttpPost("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile formFile, [FromForm] CarImages carImage)
-        {
-            var result = _ıcarImageService.Update(formFile, carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
     }
 }

@@ -22,5 +22,10 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Basarılı Giriş";
         public static string UserAlreadyExists = "Kullanıcı zaten mevcut";
         public static string AccessTokenCreated = "Token Yaratıldı";
+
+        public static string MaintenanceTime = "Sistem Bakımda!";
+        public static string CarCountofBrandError = "Bir markada en fazla 10 araç olabilir!";
+        public static string ImagesPath = "wwwroot\\Uploads\\Images\\";
+
     }
 }

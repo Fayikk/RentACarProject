@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Helper.FileHelper;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAcces.Abstract;
@@ -35,8 +36,8 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfColorDal>().As<IColorDal>().SingleInstance();
 
             //For CarImages
-            builder.RegisterType<CarImagesManager>().As<ICarImagesService>().SingleInstance();
-            builder.RegisterType<EfCarImages>().As<ICarImagesDal>().SingleInstance();
+            builder.RegisterType<CarImageManager>().As<ICarImageService>();
+            builder.RegisterType<EfCarImageDal>().As<ICarImageDal>();
 
             //For User and Auth 
             builder.RegisterType<UserManager>().As<IUserService>();
@@ -46,6 +47,7 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
+            builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

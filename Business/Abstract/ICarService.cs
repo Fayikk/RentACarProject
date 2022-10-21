@@ -13,7 +13,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Car>> GetAll();
         //List<Car> Add(Car entity);
-        IDataResult<List<CarDetailDto>> GetCarDetailDtos();
+        //IDataResult<List<CarDetailDto>> GetCarDetailDtos();
 
         //void add(Car car);
         IResult Deleted(Car car);

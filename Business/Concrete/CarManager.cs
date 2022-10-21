@@ -75,10 +75,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_ıcarDal.GetAll(ı => ı.CarId == Id), Messages.SuccessMessages);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
-        {
-            return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(), true, Messages.SuccessMessages);
-        }
+        //public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
+        //{
+        //    return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(), true, Messages.SuccessMessages);
+        //}
 
         public IResult Updated(Car car)
         {
