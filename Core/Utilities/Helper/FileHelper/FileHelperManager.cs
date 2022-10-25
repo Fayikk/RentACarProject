@@ -36,9 +36,10 @@ namespace Core.Utilities.Helper.FileHelper
                     // CarImageManager içerisine girdiğinizde buraya parametre olarak *PathConstants.ImagesPath* böyle bir şey gönderilidğini görürsünüz. PathConstants clası içerisine girdiğinizde string bir ifadeyle bir dizin adresi var. O adres bizim yükleyeceğimiz dosyaların kayıt edileceği adres burada *Check if a directory Exists* ifadesi şunu belirtiyor dosyanın kaydedileceği adres dizini var mı? varsa if yapısının kod bloğundan ayrılır eğer yoksa içinde ki kodda dosyaların kayıt edilecek dizini oluşturur.
                     Directory.CreateDirectory(root);
                 }
+                string startsWith = "uploads/images/";
                 string extension = Path.GetExtension(file.FileName);  // Seçmiş olduğumuz dosyanın uzantısını elde ediyoruz.
                 string guid = GuidHelper.GuidHelper.CreateGuid(); // Core.Utilities.Helpers.GuidHelper klasöründeki GuidManager class'ında oluşturduğumuz eşsiz ismi alıyoruz.
-                string filePath = guid + extension;  // İsim ile uzantıyı birleştiriyoruz.
+                string filePath =  guid + extension;  // İsim ile uzantıyı birleştiriyoruz.
 
                 using (FileStream fileStream = File.Create(root + filePath))  // FileStream class'ının bir örneği oluşturuldu, sonrasında ise "root + filePath" yolunda bir dosya oluşturur.
                 {

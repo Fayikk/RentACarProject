@@ -13,16 +13,18 @@ namespace Business.Abstract
     {
         IDataResult<List<Car>> GetAll();
         //List<Car> Add(Car entity);
-        //IDataResult<List<CarDetailDto>> GetCarDetailDtos();
+        IDataResult<List<CarDetailDto>> GetCarDetailDtos();
 
         //void add(Car car);
         IResult Deleted(Car car);
         IResult Updated(Car car);
 
+        IResult GetDetail(CarDetailDto carDetail);
         IResult Add(Car car);
 
         IDataResult<List<Car>> GetById(int Id);
         IDataResult<List<Car>> GetAllByColorId(int Id);
-
+        IDataResult<CarDetail> GetCarDetail(int carId);
+        //IDataResult<List<CarDetailDto>> GetByDetails();
     }
 }

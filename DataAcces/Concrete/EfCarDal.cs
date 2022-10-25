@@ -1,7 +1,9 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Utilities.Results;
 using DataAcces.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using ImpromptuInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,56 @@ namespace DataAcces.Concrete
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, RentCarsContext>, ICarDal
     {
+        public List<CarDetail> GetByDetails()
+        {
+            using (RentCarsContext context = new RentCarsContext())
+            {
+                var result = from cr in context.Cars
+                             join cl in context.Colors
+                             on cr.ColorId equals cl.ColorId
+                             join br in context.Brands
+                             on cr.BrandId equals br.BrandId
+                             select new CarDetail
+                             {
+                                 BrandName = br.BrandName,
+                                 CarId = cr.CarId,
+                                 CarName = cr.CarName,
+                                 ColorId = cl.ColorId,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = cr.DailyPrice,
+                                 ModelYear = cr.ModelYear
+
+                             };
+                return result.ToList();
+            }
+        }
+
+        public CarDetail GetCarDetail(Expression<Func<Car, bool>> filter)
+        {
+            using (RentCarsContext context = new RentCarsContext())
+            {
+                var result = from cr in context.Cars.Where(filter)
+                             join cl in context.Colors
+                             on cr.ColorId equals cl.ColorId
+                             join br in context.Brands
+                             on cr.BrandId equals br.BrandId
+
+                             select new CarDetail
+                             {
+                                 BrandName = br.BrandName,
+                                 CarId = cr.CarId,
+                                 CarName = cr.CarName,
+                                 ColorId = cr.ColorId,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = cr.DailyPrice,
+                                 CarImage = context.CarImages.Where(ci => ci.CarId == cr.CarId).ToList()
+                             };
+                return result.FirstOrDefault();
+            }
+        }
+
+
+
         public List<CarDetailDto> GetCarDetailDtos()
         {
             //Öncellikle veri tabanında işlem yaptığımzı belirtmemiz gerekmektedir.

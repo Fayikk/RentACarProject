@@ -75,10 +75,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_ıcarDal.GetAll(ı => ı.CarId == Id), Messages.SuccessMessages);
         }
 
-        //public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
-        //{
-        //    return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(), true, Messages.SuccessMessages);
-        //}
+        public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
+        {
+            return new DataResult<List<CarDetailDto>>(_ıcarDal.GetCarDetailDtos(), true, Messages.SuccessMessages);
+        }
 
         public IResult Updated(Car car)
         {
@@ -124,6 +124,15 @@ namespace Business.Concrete
 
         }
 
-       
+        public IDataResult<CarDetail> GetCarDetail(int carId)
+        {
+            return new SuccessDataResult<CarDetail>(_ıcarDal.GetCarDetail(a => a.CarId == carId),Messages.SuccessMessages);
+        }
+
+        public IResult GetDetail(CarDetailDto carDetail)
+        {
+            _ıcarDal.GetAll();
+            return new SuccessResult(true);
+        }
     }
 }

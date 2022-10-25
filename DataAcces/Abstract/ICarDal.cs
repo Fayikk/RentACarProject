@@ -16,6 +16,9 @@ namespace DataAcces.Abstract
         //Aşağıda görüldüğü üzere class'a özgü uygulamak istediğimiz ifadeleri yazıyoruz.
         //List<CarDetailDto> GetCarDetailDtos();
         List<CarDetailDto> GetCarDetailDtos();
-        
+     CarDetail  GetCarDetail(Expression<Func<Car, bool>> filter);
+
+        List<CarDetail> GetByDetails();
+
     }
 }
